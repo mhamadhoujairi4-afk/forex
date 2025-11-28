@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>فيديو متقدم مع شريط تقدّم متحرك</title>
+<style>
+  body {
+    margin: 0;
+    background-color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    flex-direction: column;
+  }
+  #videoContainer {
+    position: relative;
+    max-width: 90%;
+    max-height: 80%;
+  }
+  video {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    cursor: pointer;
+    background-color: #000;
+  }
+  #timeDisplayContainer {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-family: monospace;
+    font-size: 14px;
+  }
+  #progressBarContainer {
+    width: 100%;
+    height: 6px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+    margin-top: 5px;
+    overflow: hidden;
+  }
+  #progressBar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,215,0,0.8), rgba(255,255,255,0.8));
+    border-radius: 3px;
+    transition: width 0.1s linear;
+  }
+  #progressBar.flash {
+    background: linear-gradient(to right, rgba(255,215,0,1), rgba(255,255,255,1));
+  }
+  .indicator {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    color: white;
+    background: rgba(0,0,0,0.6);
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: none;
+    pointer-events: none;
+    user-select: none;
+  }
+  #forwardIndicator { right: 10px; }
+  #backwardIndicator { left: 10px; }
+</style>
+</head>
+<body>
+
+<div id="videoContainer">
+  <video id="myVideo" poster="poster.jpg" playsinline webkit-playsinline>
+    <source src="video1.mp4" type="video/mp4">
+    متصفحك لا يدعم تشغيل الفيديو.
+  </video>
+  <div id="forwardIndicator" class="indicator">+10s</div>
+  <div id="backwardIndicator" class="indicator">-10s</div>
+</div>
+
+<div id="timeDisplayContainer">
+  <span id="currentTime">00:00</span>
+  <span id="durationTime">00:00</span>
+</div>
+
+<div id="progressBarContainer">
+  <div id="progressBar"></div>
+</div>
+
+<script>
+const video = document.getElementById("myVideo");
+const currentTimeEl = document.getElementById("currentTime");
+const durationTimeEl = document.getElementById("durationTime");
+const progressBar = document.getElementById("progressBar");
+const forwardIndicator = document.getElementById("forwardIndicator");
+const backwardIndicator = document.getElementById("backwardIndicator");
+
+let clickCount = 0;
+let clickTimer;
+let firstPlay = true;
+
+// تحديث الوقت وشريط التقدّم
+function updateTime() {
+  let current = Math.floor(video.currentTime);
+  let duration = Math.floor(video.duration) || 0;
+  const format = t => String(Math.floor(t/60)).padStart(2,'0') + ':' + String(t%60).padStart(2,'0');
+  currentTimeEl.textContent = format(current);
+  durationTimeEl.textContent = format(duration);
+  if(duration > 0) {
+    let percent = (video.currentTime / video.duration) * 100;
+    progressBar.style.width = percent + "%";
+  }
+}
+video.addEventListener("timeupdate", updateTime);
+video.addEventListener("loadedmetadata", updateTime);
+
+// التعامل مع النقرات
+video.addEventListener("click", (e) => {
+  clickCount++;
+
+  if(clickTimer) clearTimeout(clickTimer);
+
+  clickTimer = setTimeout(() => {
+    const rect = video.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const half = rect.width / 2;
+
+    // أول نقرة لتشغيل الفيديو مع الصوت على الموبايل
+    if(firstPlay){
+      video.play();
+      firstPlay = false;
+    } else if(clickCount === 1){
+      if(video.paused) video.play();
+      else video.pause();
+      flashProgressBar();
+    } else if(clickCount === 2){
+      if(x > half){
+        video.currentTime = Math.min(video.duration, video.currentTime + 10);
+        showIndicator(forwardIndicator);
+      } else {
+        video.currentTime = Math.max(0, video.currentTime - 10);
+        showIndicator(backwardIndicator);
+      }
+    }
+
+    clickCount = 0;
+  }, 300);
+});
+
+// وظيفة لإظهار المؤشر ثم إخفاؤه
+function showIndicator(indicator) {
+  indicator.style.display = "block";
+  setTimeout(() => { indicator.style.display = "none"; }, 1500);
+}
+
+// تأثير وميض على شريط التقدّم عند نقرة التشغيل/إيقاف
+function flashProgressBar() {
+  progressBar.classList.add('flash');
+  setTimeout(() => progressBar.classList.remove('flash'), 300);
+}
+
+// منع كليك يمين والسحب
+video.addEventListener("contextmenu", e => e.preventDefault());
+video.addEventListener("dragstart", e => e.preventDefault());
+</script>
+
+</body>
+</html>

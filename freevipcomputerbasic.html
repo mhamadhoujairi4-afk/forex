@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COMPUTER BASICS</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: 'Arial', sans-serif;
+      color: #D4AF37;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      color: #D4AF37;
+      text-shadow: 0 0 10px #D4AF37;
+      animation: glow 3s ease-in-out infinite alternate;
+      margin: 30px 0;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #D4AF37;
+      }
+      to {
+        text-shadow: 0 0 20px #FFD700;
+      }
+    }
+
+    .plans-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    .plan-card {
+      background-color: #111;
+      border: 2px solid #D4AF37;
+      border-radius: 12px;
+      padding: 20px;
+      color: #D4AF37;
+      font-size: 10px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .plan-card:hover {
+      background-color: #1a1a1a;
+      transform: scale(1.03);
+    }
+
+    .plan-card p {
+      margin-top: 5px;
+      font-size: 10px;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">COMPUTER BASICS</div>
+  <div class="plans-container">
+    <a class="plan-card" href="#">
+      <h2>LEVEL 1 -FREE</h2>
+    </a>
+    <a class="plan-card" href="computerbasiclogin.html">
+      <h2>LEVEL 2 -VIP</h2>
+    </a>
+    <a class="plan-card" href="computerbasiclogin.html">
+      <h2>LEVEL 3 -VIP</h2>
+    </a>
+  </div>
+</body>
+</html>
+

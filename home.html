@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SMC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #000;
+      --text-color: #D4AF37;
+      html, body {
+        background-color: #000;
+      --glass-bg: rgba(17, 17, 17, 0.6);
+      --glass-border: rgba(212, 175, 55, 0.3);
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: var(--bg-color);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeOut 2s ease forwards;
+      animation-delay: 1.5s;
+    }
+
+    #loader h1 {
+      font-size: 40px;
+      color: var(--text-color);
+      text-shadow: 0 0 10px var(--text-color);
+      animation: glowText 2s infinite alternate;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px var(--text-color); }
+      to { text-shadow: 0 0 20px #D4AF37; }
+    }
+
+    header {
+      background-color: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo-image {
+      width: 120px;
+      height: auto;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      white-space: nowrap;
+      overflow-x: auto;
+    }
+
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: bold;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    nav a:hover {
+      background-color: var(--text-color);
+      color: var(--bg-color);
+    }
+
+    .main {
+      text-align: center;
+      padding: 60px 10%;
+      z-index: 1;
+      position: relative;
+    }
+
+    .text-content h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+
+    .text-content p {
+      font-size: 20px;
+      color: var(--text-color);
+      max-width: 800px;
+      margin: auto;
+      background-color: rgba(0,0,0,0.5);
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .rotating-word {
+      display: inline-block;
+      background-color: var(--text-color);
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: bold;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .team-section {
+      padding: 40px 10%;
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .team-members {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+
+    .member {
+      width: 160px;
+      text-align: center;
+      background-color: var(--glass-bg);
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 0 15px var(--glass-border);
+      backdrop-filter: blur(5px);
+    }
+
+    .member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid var(--text-color);
+      object-fit: cover;
+    }
+
+    .member p {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--text-color);
+      font-weight: bold;
+    }
+
+    .contact-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--text-color);
+      color: var(--bg-color);
+      border: none;
+      border-radius: 20px;
+      padding: 15px 25px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+      z-index: 999;
+    }
+
+    .contact-links {
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 30px;
+      flex-direction: column;
+      gap: 10px;
+      background-color: var(--glass-bg);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px var(--glass-border);
+      z-index: 999;
+    }
+
+    .contact-links a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #888;
+      background-color: #0a0a0a;
+      z-index: 1;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ فيديو الخلفية -->
+
+  <!-- Loader -->
+  <div id="loader">
+    <h1>SMART MONEY CONCEPTS</h1>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <img src="smc.png" alt="SBA Logo" class="logo-image">
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="login.html">Courses</a>
+      <a href="accounts.html">Accounts</a>
+      <a href="referals.html">Referals</a>
+      <a href="#">About</a>
+    </nav>
+  </header>
+
+  <!-- Main Section -->
+  <section class="main">
+    <div class="text-content">
+      <h1><span class="rotating-word" id="rotating-word">Forex</span></h1>
+      <p>
+        
+      <strong>SMC </strong> or Smart Money </strong>Concept is a trading method that focuses on understanding the movement of smart money in the market, such as banks and market makers.
+This idea came from the experience of traders who noticed how large institutions move prices to collect liquidity and control market direction.
+One of the well-known people who helped develop this concept is <strong> Michael Huddleston (ICT)</strong>, who explained techniques like Order Blocks and Liquidity.
+
+The course is divided into  <strong>several levels</strong>, starting from the basics up to advanced strategies, so each person can progress according to their own level.
+
+After enrolling, there will be a  <strong>VIP Telegram channel</strong> for members, providing exclusive content and direct support.
+
+The course also includes a  <strong>referral system</strong>, where you can earn benefits by bringing people to register or open trading accounts.
+
+In the advanced stages, after mastering the strategies, there is an opportunity to apply for <strong> funded accounts</strong>, allowing you to trade with company capital without risking your own money.
+
+In addition to the lessons,  <strong>we regularly provide market analysis</strong> on major assets such as <strong> Gold, EUR/USD, GBP/USD, US100 (Nasdaq), and US30 (Dow Jones) </strong>to help members stay updated on key trading opportunities.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <h2>Founded by:</h2>
+    <div class="team-members">
+      <div class="member">
+        <img src="mhamad.jpg" alt="Mohamad">
+        <p>Mohamad Abdo Houjairi</p>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- Contact Button -->
+  <button class="contact-button" onclick="toggleContact()">SMC</button>
+  <div class="contact-links" id="contact-links">
+    <a href="https://wa.me/96181535277"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="#"><i class="fab fa-telegram"></i> Telegram</a>
+    <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 All rights reserved. Website developed by Mohamad Abdo Houjairi.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 2000);
+    };
+
+    const words = [ "EURO","GOLD", "GBP", "BTC", "US30", "US100"];
+    let i = 0;
+    const el = document.getElementById("rotating-word");
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      el.textContent = words[i];
+    }, 2000);
+
+    function toggleContact() {
+      const box = document.getElementById("contact-links");
+      box.style.display = box.style.display === "flex" ? "none" : "flex";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000; /* أسود */
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+}
+
+.logo {
+  font-size: 50px;
+  font-weight: bold;
+  color: #D4AF37; /* ذهبي */
+  text-shadow: 0 0 10px #D4AF37;
+  animation: glow 3s ease-in-out infinite alternate;
+  margin: 20px 0;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #D4AF37;
+  }
+  to {
+    text-shadow: 0 0 20px #FFD700;
+  }
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.card {
+  background-color: #111;
+  border: 2px solid #D4AF37;
+  border-radius: 12px;
+  padding: 20px;
+  color: #D4AF37;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card span {
+  display: block;
+  font-size: 16px;
+  margin-top: 5px;
+  color: #FFD700;
+}
+
+.card:hover {
+  background-color: #1a1a1a;
+  transform: scale(1.03);
+}
+Show quoted text
+
+

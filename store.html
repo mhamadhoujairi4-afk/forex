@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متجر Mafia Trader</title>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #111;
+      color: white;
+    }
+
+    header {
+      background-color: #000;
+      color: #FFD700;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      box-shadow: 0 2px 10px #FFD70055;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .search-bar input {
+      width: 80%;
+      padding: 0.7rem;
+      border-radius: 25px;
+      border: 2px solid #FFD700;
+      font-size: 1rem;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .product {
+      background-color: #222;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px 2px #FFD70088;
+      text-align: center;
+    }
+
+    .product img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 1rem;
+    }
+
+    .product h3 {
+      margin: 0.5rem 0 0.2rem;
+      color: #FFD700;
+    }
+
+    .product p {
+      margin: 0 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    .product button {
+      padding: 0.5rem 1rem;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 25px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: #222;
+      padding: 2rem;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 0 20px #FFD700;
+    }
+
+    .modal-content input {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: 1px solid #FFD700;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .modal-content button {
+      margin-right: 10px;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .confirm {
+      background-color: #FFD700;
+      color: #000;
+    }
+
+    .cancel {
+      background-color: #888;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <header>متجر Mafia Trader</header>
+
+  <div class="search-bar">
+    <input type="text" placeholder="ابحث عن منتج...">
+  </div>
+
+  <div class="products">
+    <!-- منتجات متعددة -->
+    <div class="product">
+      <img src="creatin.png" alt="منتج 1">
+         <h3>Creatin</h3>
+      <p>25$</p>
+      <button onclick="openModal('منتج 1')">+</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/300x160?text=منتج+2" alt="منتج 2">
+      <h3>منتج 2</h3>
+      <p>15,000 ل.ل</p>
+      <button onclick="openModal('منتج 2')">+</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/300x160?text=منتج+3" alt="منتج 3">
+      <h3>منتج 3</h3>
+      <p>12,500 ل.ل</p>
+      <button onclick="openModal('منتج 3')">+</button>
+    </div>
+    <div class="product">
+      <img src="https://via.placeholder.com/300x160?text=منتج+4" alt="منتج 4">
+      <h3>منتج 4</h3>
+      <p>20,000 ل.ل</p>
+      <button onclick="openModal('منتج 4')">+</button>
+    </div>
+  </div>
+
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <h3 style="color: #FFD700; text-align: center;">تأكيد الشراء</h3>
+      <input type="text" id="customerName" placeholder="اسمك">
+      <input type="text" id="customerLocation" placeholder="موقعك">
+      <input type="tel" id="customerPhone" placeholder="رقم الهاتف">
+      <div style="text-align: center;">
+        <button class="confirm" onclick="confirmOrder()">تأكيد</button>
+        <button class="cancel" onclick="closeModal()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedProduct = "";
+
+    function openModal(productName) {
+      selectedProduct = productName;
+      document.getElementById('orderModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').style.display = 'none';
+    }
+
+    function confirmOrder() {
+      const name = document.getElementById('customerName').value;
+      const location = document.getElementById('customerLocation').value;
+      const phone = document.getElementById('customerPhone').value;
+      if (name && location && phone) {
+        console.log("طلب جديد:", { المنتج: selectedProduct, الاسم: name, الموقع: location, الهاتف: phone });
+        alert("تم تأكيد الطلب لمنتج: " + selectedProduct);
+        closeModal();
+      } else {
+        alert("يرجى ملء جميع الحقول.");
+      }
+    }
+  </script>
+</body>
+
+</html>
+

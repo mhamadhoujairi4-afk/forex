@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>دورة الفيديوهات</title>
+  <link rel="stylesheet" href="mhmd.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>سلسلة تعليمية - الفيديو الأول</h1>
+
+    <div class="video-container">
+      <video id="video1" width="100%" controls>
+        <source src="video1.mp4" type="video/mp4" />
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+    </div>
+
+    <div id="question1" class="question hidden">
+      <h3>ما هو عنوان الفيديو؟</h3>
+      <ul>
+        <li><button onclick="checkAnswer(1, 'a')">الخطأ</button></li>
+        <li><button onclick="checkAnswer(1, 'b')">الصحيح</button></li>
+        <li><button onclick="checkAnswer(1, 'c')">الخطأ</button></li>
+      </ul>
+      <p id="feedback1"></p>
+    </div>
+
+    <div id="nextVideo" class="hidden">
+      <h1>رائع! جاهز للفيديو التالي؟</h1>
+      <video id="video2" width="100%" controls>
+        <source src="video2.mp4" type="video/mp4" />
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

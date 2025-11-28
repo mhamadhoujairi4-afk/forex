@@ -1,0 +1,120 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  direction: ltr;
+  background-color: #000; /* أسود */
+}
+
+.login-container {
+  width: 300px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: #111; /* أسود داكن */
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); /* ظل ذهبي */
+  text-align: center;
+  color: white;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #D4AF37; /* ذهبي ملكي */
+  text-shadow: 0 0 10px #D4AF37;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 14px;
+  color: #cfd8dc;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #fff;
+  color: #000;
+}
+
+.login-container input::placeholder {
+  color: #aaa;
+}
+
+.checkbox {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.checkbox input {
+  margin-right: 5px;
+}
+
+.checkbox label {
+  font-size: 13px;
+  color: #D4AF37; /* ذهبي */
+}
+
+.login-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #D4AF37; /* ذهبي */
+  color: black;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  background-color: #FFD700; /* ذهبي لمّاع */
+}
+
+.mafia-logo {
+  font-size: 40px;
+  font-weight: bold;
+  color: #FFD700; /* ذهبي ساطع */
+  text-shadow: 0 0 5px #FFD700, 0 0 10px #FFD700, 0 0 20px #FFD700;
+  text-align: center;
+  margin-bottom: 20px;
+  display: inline-block;
+  animation: bounceUpDown 1s infinite ease-in-out;
+}
+
+@keyframes bounceUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.login-container {
+  width: 300px;
+  margin: 100px auto;
+  padding: 30px;
+  background: #111;
+  border-radius: 10px;
+box-shadow: 0 0 15px rgba(212, 175, 55,0.4)
+}
+
+.footer-note {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 10px;
+  opacity: 0.6;
+}
+Show quoted text
+
+
